@@ -20,7 +20,7 @@ class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
-        // Objects ("resources") that will be used to get locks
+        // Objects used as resources that will be used to get locks
         Object obj1 = new Object();
         Object obj2 = new Object();
 
