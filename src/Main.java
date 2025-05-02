@@ -19,7 +19,10 @@
 class Main {
 
     public static void main(String[] args) throws InterruptedException {
-        Object obj1 = new Object(), obj2 = new Object();
+
+        // Objects ("resources") that will be used to get locks
+        Object obj1 = new Object();
+        Object obj2 = new Object();
 
         System.out.println("--- Starting, attempting to deadlock (press Ctrl+C to stop)...");
 
