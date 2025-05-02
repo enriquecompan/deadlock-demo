@@ -23,6 +23,7 @@ class Main {
 
         System.out.println("--- Starting, attempting to deadlock (press Ctrl+C to stop)...");
 
+        // Thread 1
         var t1 = Thread.ofVirtual().start(() -> {
             try {
                 synchronized (obj1) {
@@ -41,6 +42,7 @@ class Main {
             System.out.println("t1 is done.");
         });
 
+        // Thread 2
         var t2 = Thread.ofVirtual().start(() -> {
             synchronized (obj2) {
                 System.out.println("t2 acquired lock on obj2.");
@@ -51,6 +53,17 @@ class Main {
             }
 
             System.out.println("t2 is done.");
+        });
+
+        // An extra thread to report the status of the other threads
+        Thread.ofVirtual().start(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("t1 state: " + t1.getState());
+            System.out.println("t2 state: " + t2.getState());
         });
 
         // Wait for both threads to finish gracefully (if they don't deadlock)
